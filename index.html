@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scriptum Mundi</title>
+    <style>
+      :root {
+        --font-serif: "Literata", "Georgia", serif;
+        --font-sans: "Inter", "Helvetica Neue", sans-serif;
+        --color-bg: #f5f3ef;
+        --color-text: #2e2a26;
+        --color-accent: #a4785c;
+        --color-muted: #736d67;
+        --color-panel: #ffffff;
+        --border-radius: 8px;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-serif);
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.75;
+        padding: 2rem 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+
+      header h1 {
+        font-size: 3rem;
+        margin-bottom: 0.2rem;
+        font-weight: 500;
+      }
+
+      header p {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        color: var(--color-muted);
+      }
+
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      article {
+        margin-bottom: 3rem;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 0.5rem;
+      }
+
+      .text-original,
+      .text-translation {
+        margin-top: 1rem;
+        padding: 1rem 1.25rem;
+        background-color: var(--color-panel);
+        border-left: 4px solid var(--color-accent);
+        border-radius: var(--border-radius);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .text-original {
+        font-family: "EB Garamond", var(--font-serif);
+        font-size: 1.05rem;
+      }
+
+      .text-translation {
+        font-family: var(--font-sans);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--color-muted);
+      }
+
+      footer {
+        margin-top: 5rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+        padding-top: 2rem;
+        border-top: 1px solid #ddd;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-bg: #1e1b18;
+          --color-text: #e8e1d9;
+          --color-accent: #d8b49c;
+          --color-muted: #9e948c;
+          --color-panel: #282421;
+        }
+
+        body {
+          background-color: var(--color-bg);
+          color: var(--color-text);
+        }
+
+        .text-original,
+        .text-translation {
+          background-color: var(--color-panel);
+          border-left-color: var(--color-accent);
+        }
+
+        h2 {
+          color: var(--color-accent);
+          border-bottom-color: #3a3632;
+        }
+
+        header p,
+        footer {
+          color: var(--color-muted);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Scriptum Mundi</h1>
+      <p>A repository of ancient texts and their luminous afterlives</p>
+    </header>
+
+    <main>
+      <article>
+        <h2>The Gospel of Thomas</h2>
+        <div class="text-original">
+          <p><strong>Greek:</strong> Παν ἐἄνδρως υμέν εἰπεν ἔνα ζητεῖν καὶ λεγούσαι αἔτι θαῖσας.</p>
+        </div>
+        <div class="text-translation">
+          <p><strong>Translation:</strong> These are the secret sayings that the living Jesus spoke and Didymos Judas Thomas recorded.</p>
+        </div>
+      </article>
+
+      <article>
+        <h2>Enuma Elish</h2>
+        <div class="text-original">
+          <p><strong>Akkadian (transliterated):</strong> Enuma elish la nabu shamamu, shaplish ammatum shuma la zakrat.</p>
+        </div>
+        <div class="text-translation">
+          <p><strong>Translation:</strong> When on high the heavens had not been named, and below the earth had not been called by name...</p>
+        </div>
+      </article>
+    </main>
+
+    <footer>&copy; 2025 Scriptum Mundi &mdash; Curated with reverence and care</footer>
+  </body>
+</html>

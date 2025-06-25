@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plato – Timaeus | Scriptum Mundi</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Inter&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --font-serif: "EB Garamond", serif;
+        --font-sans: "Inter", sans-serif;
+        --color-bg: #f7f5f1;
+        --color-text: #2e2a26;
+        --color-accent: #a4785c;
+        --color-muted: #6e645c;
+        --color-panel: #ffffff;
+        --border-radius: 8px;
+      }
+
+      body {
+        margin: 0;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-family: var(--font-serif);
+        line-height: 1.75;
+        padding: 2rem 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+      }
+
+      header p {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        color: var(--color-muted);
+      }
+
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      article {
+        margin-bottom: 3rem;
+      }
+
+      details {
+        background-color: var(--color-panel);
+        border-left: 4px solid var(--color-accent);
+        border-radius: var(--border-radius);
+        margin: 1rem 0 3px;
+        padding: 1rem 1.25rem 3px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        overflow: visible;
+      }
+
+      summary {
+        cursor: pointer;
+        font-size: 1.05rem;
+        margin-bottom: 1rem;
+      }
+
+      .highlight {
+        background: rgb(243, 243, 6);
+        transition: background 0.3s ease;
+      }
+
+      audio {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      footer {
+        margin-top: 3rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+        padding-top: 1.5rem;
+        border-top: 1px solid #ddd;
+      }
+      .commentary {
+        margin-top: 0.75rem;
+        padding-top: 0.5rem;
+        border-top: 1px dashed var(--color-muted);
+      }
+      .commentary summary {
+        font-size: 0.95rem;
+        color: var(--color-accent);
+      }
+      .commentary p {
+        margin: 0.5rem 0;
+        font-size: 0.95rem;
+        font-family: var(--font-sans);
+        color: var(--color-text);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Plato – Timaeus</h1>
+      <p>An excerpt from the cosmological dialogue, in Greek and English</p>
+    </header>
+
+    <main>
+      <audio controls id="narration" preload="none">
+        <source src="audio/timaeus_1.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+
+      <article>
+        <details>
+          <summary id="line1">
+            <strong>Socrates</strong>: One, two, three; but where, my dear Timaeus, is the fourth of those who were yesterday my guests and are to be my entertainers to-day?
+          </summary>
+          <p>ΣΩ. εἷς, δύο, τρεῖς· ὁ δὲ δὴ τέταρτος ἡμῖν, ὦ φίλε Τίμαιε, ποῦ τῶν χθὲς μὲν δαιτυμόνων, τὰ νῦν δὲ ἑστιατόρων;</p>
+          <details class="commentary">
+            <summary><em>Commentaries (click to open)</em></summary>
+            <ul>
+              <li>
+                <strong>R. D. Archer-Hind (1888):</strong> Sokrates meets by appointment three of the friends to whom he has on the previous day narrated the conversation recorded in the Republic.
+                After the absence of the fourth member of the party has been explained, he proceeds to summarise the social and political theories propounded in that dialogue.
+              </li>
+            </ul>
+          </details>
+        </details>
+
+        <details>
+          <summary id="line2"><strong>Timaeus</strong>: He has been taken ill, Socrates; for he would not willingly have been absent from this gathering.</summary>
+          <p>ἀσθένειά τις αὐτῷ συνέπεσεν, ὦ Σώκρατες· οὐ γὰρ ἂν ἑκὼν τῆσδε ἀπελείπετο τῆς συνουσίας.</p>
+        </details>
+
+        <details>
+          <summary id="line3"><strong>Socrates</strong>: Then, if he is not coming, you and the two others must supply his place.</summary>
+          <p>οὐκοῦν σὸν τῶνδέ τε ἔργον καὶ τὸ ὑπὲρ τοῦ ἀπόντος ἀναπληροῦν μέρος;</p>
+        </details>
+
+        <details>
+          <summary id="line4">
+            <strong>Timaeus</strong>: Certainly, and we will do all that we can; having been handsomely entertained by you yesterday, those of us who remain should be only too glad to return your
+            hospitality.
+          </summary>
+          <p>πάνυ μὲν οὖν, καὶ κατὰ δύναμίν γε οὐδὲν ἐλλείψομεν· οὐδὲ γὰρ ἂν εἴη δίκαιον, χθὲς ὑπὸ σοῦ ξενισθέντας οἷς ἦν πρέπον ξενίοις, μὴ οὐ προθύμως σὲ τοὺς λοιποὺς ἡμῶν ἀνταφεστιᾶν.</p>
+        </details>
+
+        <details>
+          <summary id="line5"><strong>Socrates</strong>: Do you remember what were the points of which I required you to speak?</summary>
+          <p>ἆρʼ οὖν μέμνησθε ὅσα ὑμῖν καὶ περὶ ὧν ἐπέταξα εἰπεῖν;</p>
+        </details>
+
+        <details>
+          <summary id="line6">
+            <strong>Timaeus</strong>: We remember some of them, and you will be here to remind us of anything which we have forgotten: or rather, if we are not troubling you, will you briefly
+            recapitulate the whole, and then the particulars will be more firmly fixed in our memories?
+          </summary>
+          <p>τὰ μὲν μεμνήμεθα, ὅσα δὲ μὴ, σὺ παρὼν ὑπομνήσεις· μᾶλλον δέ, εἰ μή τί σοι χαλεπόν, ἐξ ἀρχῆς διὰ βραχέων πάλιν ἐπάνελθε αὐτά, ἵνα βεβαιωθῇ μᾶλλον παρʼ ἡμῖν.</p>
+        </details>
+
+        <details>
+          <summary id="line7">
+            <strong>Socrates</strong>: To be sure I will: the chief theme of my yesterday’s discourse was the State—how constituted and of what citizens composed it would seem likely to be most
+            perfect.
+          </summary>
+          <p>ταῦτʼ ἔσται. χθές που τῶν ὑπʼ ἐμοῦ ῥηθέντων λόγων περὶ πολιτείας ἦν τὸ κεφάλαιον οἵα τε καὶ ἐξ οἵων ἀνδρῶν ἀρίστη κατεφαίνετʼ ἄν μοι γενέσθαι.</p>
+        </details>
+      </article>
+    </main>
+
+    <script>
+      const timestamps = [
+        {timeStart: 0.0, timeEnd: 8.0, element: "#line1"},
+        {timeStart: 8.3, timeEnd: 14.0, element: "#line2"},
+        {timeStart: 14.1, timeEnd: 18.0, element: "#line3"},
+        {timeStart: 18.1, timeEnd: 29.9, element: "#line4"},
+        {timeStart: 30.0, timeEnd: 34.2, element: "#line5"},
+        {timeStart: 34.3, timeEnd: 48.0, element: "#line6"},
+        {timeStart: 48.1, timeEnd: 57.8, element: "#line7"},
+
+        // …etc. make sure these numbers are in *media* seconds
+      ];
+
+      const audio = document.getElementById("narration");
+      audio.addEventListener("timeupdate", () => {
+        const t = audio.currentTime;
+        timestamps.forEach(({timeStart, timeEnd, element}) => {
+          const el = document.querySelector(element);
+          if (!el) return;
+          el.classList.toggle("highlight", t >= timeStart && t < timeEnd);
+        });
+      });
+
+      timestamps.forEach(({timeStart, element}) => {
+        const summary = document.querySelector(element);
+        if (!summary) return;
+        const details = summary.closest("details");
+        if (!details) return;
+
+        const btn = document.createElement("button");
+        btn.textContent = "▶ Go to line";
+        btn.className = "goto";
+        btn.style.marginTop = "0.5rem";
+        btn.addEventListener("click", () => {
+          audio.currentTime = timeStart;
+          audio.play();
+          details.open = true;
+        });
+
+        // find the commentary block, if any
+        const commentary = details.querySelector(".commentary");
+        if (commentary) {
+          details.insertBefore(btn, commentary);
+        } else {
+          details.appendChild(btn);
+        }
+      });
+    </script>
+
+    <footer>&copy; 2025 Scriptum Mundi — Translation curated with reverence</footer>
+  </body>
+</html>
