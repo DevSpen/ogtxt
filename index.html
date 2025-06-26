@@ -121,6 +121,51 @@
           color: var(--color-muted);
         }
       }
+      /* MOBILE STYLING */
+      @media (max-width: 600px) {
+        /* 1. Scale down the H1 for phones */
+        header h1 {
+          font-size: 1.8rem; /* was 2.5rem */
+          line-height: 1.2;
+          margin-bottom: 0.5rem;
+        }
+
+        /* 2. Stack the audio + controls vertically */
+        .audio-sticky {
+          flex-direction: column;
+          align-items: stretch;
+          padding: 0.5rem; /* less horizontal padding */
+          gap: 0.5rem;
+        }
+
+        /* 3. Make the native player full-width */
+        .audio-element {
+          margin-right: 0;
+          margin-bottom: 0.5rem;
+          width: 100%;
+          height: 2.4rem; /* a little taller so controls aren’t cramped */
+        }
+
+        /* 4. Keep your skip + toggle controls on one line but spread out */
+        .controls-group {
+          justify-content: space-between;
+          width: 100%;
+        }
+
+        /* 5. Slightly larger buttons for fat fingers */
+        .control-btn {
+          padding: 0.5rem;
+        }
+        .control-btn img {
+          width: 1.75rem;
+          height: 1.75rem;
+        }
+
+        /* 6. Reduce the gap on the skip-group just a hair */
+        .skip-group {
+          gap: 0.2rem;
+        }
+      }
     </style>
   </head>
   <body>
