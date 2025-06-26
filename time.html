@@ -19,27 +19,22 @@
 
       body {
         margin: 0;
+        padding: 2rem 1.5rem;
+        font: 1.1rem/1.75 var(--font-serif);
         background: var(--color-bg);
         color: var(--color-text);
-        font-family: var(--font-serif);
-        line-height: 1.75;
-        padding: 2rem 1.5rem;
-        font-size: 1.1rem;
       }
-
       header {
         text-align: center;
         margin-bottom: 3rem;
+        font-family: var(--font-sans);
       }
-
       header h1 {
         font-size: 2.5rem;
         margin-bottom: 0.3rem;
         font-weight: 500;
       }
-
       header p {
-        font-family: var(--font-sans);
         font-size: 1rem;
         color: var(--color-muted);
       }
@@ -48,44 +43,26 @@
         max-width: 760px;
         margin: 0 auto;
       }
-
       article {
         margin-bottom: 3rem;
       }
 
       details {
-        background-color: var(--color-panel);
+        background: var(--color-panel);
         border-left: 4px solid var(--color-accent);
         border-radius: var(--border-radius);
         margin: 1rem 0 3px;
         padding: 1rem 1.25rem 3px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        overflow: visible;
       }
-
       summary {
         cursor: pointer;
         font-size: 1.05rem;
         margin-bottom: 1rem;
       }
-
       .highlight {
         background: rgb(243, 243, 6);
-        transition: background 0.3s ease;
-      }
-
-      audio {
-        width: 100%;
-        margin-bottom: 1rem;
-      }
-
-      footer {
-        margin-top: 3rem;
-        text-align: center;
-        font-size: 0.9rem;
-        color: var(--color-muted);
-        padding-top: 1.5rem;
-        border-top: 1px solid #ddd;
+        transition: background 0.3s;
       }
       .commentary {
         margin-top: 0.75rem;
@@ -98,9 +75,102 @@
       }
       .commentary p {
         margin: 0.5rem 0;
-        font-size: 0.95rem;
-        font-family: var(--font-sans);
-        color: var(--color-text);
+        font: 0.95rem var(--font-sans);
+      }
+
+      footer {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+        padding-top: 1.5rem;
+        border-top: 1px solid #ddd;
+      }
+
+      .audio-sticky {
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        background: var(--color-panel);
+
+        border-bottom: none;
+        transition: box-shadow 0.3s;
+      }
+      .audio-sticky-active {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .audio-element {
+        flex: 1;
+        margin-right: 0.9rem;
+        height: 2.2rem;
+      }
+
+      .controls-group {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: auto;
+      }
+
+      .skip-group {
+        display: flex;
+        gap: 0.25rem;
+      }
+
+      .control-btn {
+        background: none;
+        border: none;
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .control-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 4px;
+      }
+      .control-btn img {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      .auto-scroll-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.9rem;
+      }
+      .auto-scroll-wrapper input {
+        appearance: none;
+        width: 1.1em;
+        height: 1.1em;
+        border: 2px solid var(--color-accent);
+        border-radius: 3px;
+        background: #fff;
+        position: relative;
+        cursor: pointer;
+      }
+      .auto-scroll-wrapper input:checked {
+        background: var(--color-accent);
+      }
+      .auto-scroll-wrapper input:checked::after {
+        content: "";
+        position: absolute;
+        left: 0.3em;
+        top: 0.1em;
+        width: 0.25em;
+        height: 0.6em;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+      .auto-scroll-wrapper label {
+        cursor: pointer;
       }
     </style>
   </head>
@@ -112,10 +182,27 @@
     </header>
 
     <main>
-      <audio controls id="narration" preload="none">
-        <source src="audio/timaeus_1.mp3" type="audio/mpeg" />
-        Your browser does not support the audio element.
-      </audio>
+      <div class="audio-sticky" id="audioWrapper">
+        <audio controls id="narration" preload="none" class="audio-element">
+          <source src="audio/timaeus_1.mp3" type="audio/mpeg" />
+        </audio>
+
+        <div class="controls-group">
+          <div class="skip-group">
+            <button id="rewind10" class="control-btn" aria-label="Rewind 10 seconds">
+              <img src="./media/backward10.png" alt="⏪" />
+            </button>
+            <button id="forward10" class="control-btn" aria-label="Forward 10 seconds">
+              <img src="./media/forward10.png" alt="⏩" />
+            </button>
+          </div>
+          <div class="auto-scroll-wrapper">
+            <input type="checkbox" id="auto_scroll_checkbox" />
+            <label for="auto_scroll_checkbox">Auto-scroll</label>
+          </div>
+        </div>
+      </div>
+      <!-- remove after testing -->
 
       <article>
         <details>
@@ -172,6 +259,127 @@
           </summary>
           <p>ταῦτʼ ἔσται. χθές που τῶν ὑπʼ ἐμοῦ ῥηθέντων λόγων περὶ πολιτείας ἦν τὸ κεφάλαιον οἵα τε καὶ ἐξ οἵων ἀνδρῶν ἀρίστη κατεφαίνετʼ ἄν μοι γενέσθαι.</p>
         </details>
+        <!-- Line 8 -->
+        <details>
+          <summary id="line8"><strong>Timaeus</strong>: Yes, Socrates; and what you said of it was very much to our mind.</summary>
+          <p>ΤΙ. καὶ μάλα γε ἡμῖν, ὦ Σώκρατες, ῥηθεῖσα πᾶσιν κατὰ νοῦν.</p>
+        </details>
+
+        <!-- Line 9 -->
+        <details>
+          <summary id="line9"><strong>Socrates</strong>: Did we not begin by separating the husbandmen and the artisans from the class of defenders of the State?</summary>
+          <p>ΣΩ. ἆρʼ οὖν οὐ τὸ τῶν γεωργῶν ὅσαι τε ἄλλαι τέχναι πρῶτον ἐν αὐτῇ χωρὶς διειλόμεθα ἀπὸ τοῦ γένους τοῦ τῶν προπολεμησόντων;</p>
+        </details>
+
+        <!-- Line 10 -->
+        <details>
+          <summary id="line10"><strong>Timaeus</strong>: Yes.</summary>
+          <p>ΤΙ. ναί.</p>
+        </details>
+
+        <!-- Line 11 -->
+        <details>
+          <summary id="line11">
+            <strong>Socrates</strong>: And when we had given to each one that single employment and particular art which was suited to his nature, we spoke of those who were intended to be our
+            warriors, and said that they were to be guardians of the city against attacks from within as well as from without, and to have no other employment; they were to be merciful in judging
+            their subjects, of whom they were by nature friends, but fierce to their enemies, when they came across them in battle.
+          </summary>
+          <p>
+            ΣΩ. καὶ κατὰ φύσιν δὴ δόντες τὸ καθʼ αὑτὸν ἑκάστῳ ἕν μόνον ἐπιτήδευμα καὶ μίαν τέχνην, τούτους πρὸ πάντων ἔδει πολεμεῖν· εἴπομεν ὡς ἄρα αὐτοὺς δέοι φύλακας εἶναι μόνον τῆς πόλεως, εἴ τις
+            τῶν ἔξωθεν ἢ τῶν ἔνδοθεν κακουργήσων· δικάζοντας μὲν πράως τοῖς ὑπ᾽ αὐτῶν ἀρχομένοις καὶ φύσει φίλοις, χαλεποὺς δὲ ἐν ταῖς μάχαις τοῖς ἐντυγχάνουσι τοῖς ἐχθροῖς.
+          </p>
+        </details>
+        <!-- Line 12 -->
+        <details>
+          <summary id="line12"><strong>Timaeus</strong>: Exactly.</summary>
+          <p>ΤΙ. παντάπασι μὲν οὖν.</p>
+        </details>
+
+        <!-- Line 13 -->
+        <details>
+          <summary id="line13">
+            <strong>Socrates</strong>: We said, if I am not mistaken, that the guardians should be gifted with a temperament in a high degree both passionate and philosophical; and that then they
+            would be as they ought to be, gentle to their friends and fierce with their enemies.
+          </summary>
+          <p>ΣΩ. φύσιν γὰρ οἶμαί τινα τῶν φυλάκων τῆς ψυχῆς ἐλέγομεν ἅμα μὲν θυμοειδῆ, ἅμα δὲ φιλόσοφον δεῖν εἶναι διαφερόντως, ἵνα πρὸς ἑκατέρους δύναιντο ὀρθῶς πρᾷοι καὶ χαλεποὶ γίγνεσθαι.</p>
+        </details>
+
+        <!-- Line 14 -->
+        <details>
+          <summary id="line14"><strong>Timaeus</strong>: Certainly.</summary>
+          <p>ΤΙ. ναί.</p>
+        </details>
+
+        <!-- Line 15 -->
+        <details>
+          <summary id="line15">
+            <strong>Socrates</strong>: And what did we say of their education? Were they not to be trained in gymnastic, and music, and all other sorts of knowledge which were proper for them?
+          </summary>
+          <p>ΣΩ. τί δὲ τροφήν; ἆρʼ οὐ γυμναστικῇ καὶ μουσικῇ μαθήμασίν τε ὅσα προσήκει τούτοις, ἐν ἅπασι τεθράφθαι;</p>
+        </details>
+
+        <!-- Line 16 -->
+        <details>
+          <summary id="line16"><strong>Timaeus</strong>: Very true.</summary>
+          <p>ΤΙ. πάνυ μὲν οὖν.</p>
+        </details>
+
+        <!-- Line 17 -->
+        <details>
+          <summary id="line17">
+            <strong>Socrates</strong>: And being thus trained they were not to consider gold or silver or anything else to be their own private property; they were to be like hired troops, receiving
+            pay for keeping guard from those who were protected by them—the pay was to be no more than would suffice for men of simple life; and they were to spend in common, and to live together in
+            the continual practice of virtue, which was to be their sole pursuit.
+          </summary>
+          <p>
+            ΣΩ. τοὺς δέ γε οὕτω τραφέντας ἐλέχθη που μήτε χρυσὸν μήτε ἄργυρον μήτε ἄλλο ποτὲ μηδὲν κτῆμα ἑαυτῶν ἴδιον νομίζειν δεῖν, ἀλλʼ ὡς ἐπικούρους μισθὸν λαμβάνοντας τῆς φυλακῆς παρὰ τῶν
+            σῳζομένων ὑπʼ αὐτῶν, ὅσος σώφροσιν μέτριος, ἀναλίσκειν τε δὴ κοινῇ καὶ συνδιαιτωμένους μετὰ ἀλλήλων ζῆν, ἐπιμέλειαν ἔχοντας ἀρετῆς διὰ παντός, τῶν ἄλλων ἐπιτηδευμάτων ἄγοντας σχολήν.
+          </p>
+        </details>
+
+        <!-- Line 18 -->
+        <details>
+          <summary id="line18"><strong>Timaeus</strong>: That was also said.</summary>
+          <p>ΤΙ. ἐλέχθη καὶ ταῦτα ταύτῃ.</p>
+        </details>
+
+        <!-- Line 19 -->
+        <details>
+          <summary id="line19">
+            <strong>Socrates</strong>: Neither did we forget the women; of whom we declared, that their natures should be assimilated and brought into harmony with those of the men, and that common
+            pursuits should be assigned to them both in time of war and in their ordinary life.
+          </summary>
+          <p>
+            ΣΩ. καὶ μὲν δὴ καὶ περὶ γυναικῶν ἐπεμνήσθημεν, ὡς τὰς φύσεις τοῖς ἀνδράσιν παραπλησίας εἴη συναρμοστέον, καὶ τὰ ἐπιτηδεύματα πάντα κοινὰ κατά τε πόλεμον καὶ κατὰ τὴν ἄλλην δίαιταν δοτέον
+            πάσαις.
+          </p>
+        </details>
+
+        <!-- Line 20 -->
+        <details>
+          <summary id="line20"><strong>Timaeus</strong>: That, again, was as you say.</summary>
+          <p>ΤΙ. ταύτῃ καὶ ταῦτα ἐλέγετο.</p>
+        </details>
+
+        <!-- Line 21 -->
+        <details>
+          <summary id="line21">
+            <strong>Socrates</strong>: And what about the procreation of children? Or rather, was not that proposal too singular to be forgotten? For all wives and children were to be in common, so
+            that no one should know his own child, but all should imagine themselves one family—those of suitable age as brothers and sisters, the elders as parents and grandparents, and the younger
+            as children and grandchildren.
+          </summary>
+          <p>
+            ΣΩ. τί δὲ δὴ τὸ περὶ τῆς παιδοποιίας; ἢ τοῦτο μὲν διὰ τὴν ἀήθειαν τῶν λεχθέντων εὐμνημόνευτον, ὅτι κοινὰ τὰ τῶν γάμων καὶ τὰ τῶν παίδων πᾶσιν ἁπάντων ἐτίθεμεν, μηχανωμένους ὅπως μηδείς
+            ποτε τὸ γεγενημένον αὐτῶν ἰδίᾳ γνώσοιτο, νομιοῦσιν δὲ πάντες πάντας αὐτοὺς ὁμογενεῖς, ἀδελφὰς μὲν καὶ ἀδελφοὺς ὅσοιπερ ἂν τῆς πρεπούσης ἐντὸς ἡλικίας γίγνωνται, τοὺς δʼ ἔμπροσθεν καὶ
+            ἄνωθεν γονέας τε καὶ γονέων προγόνους, τοὺς δʼ εἰς τὸ κάτωθεν ἐκγόνους παῖδάς τε ἐκγόνων;
+          </p>
+        </details>
+
+        <!-- Line 22 -->
+        <details>
+          <summary id="line22"><strong>Timaeus</strong>: Yes, and that proposal is easy to remember, as you say.</summary>
+          <p>ΤΙ. ναί, καὶ ταῦτα εὐμνημόνευτα ᾗ λέγεις.</p>
+        </details>
       </article>
     </main>
 
@@ -181,20 +389,45 @@
         {timeStart: 8.3, timeEnd: 14.0, element: "#line2"},
         {timeStart: 14.1, timeEnd: 18.0, element: "#line3"},
         {timeStart: 18.1, timeEnd: 29.9, element: "#line4"},
-        {timeStart: 30.0, timeEnd: 34.2, element: "#line5"},
-        {timeStart: 34.3, timeEnd: 48.0, element: "#line6"},
+        {timeStart: 30.0, timeEnd: 34.0, element: "#line5"},
+        {timeStart: 34.1, timeEnd: 48.0, element: "#line6"},
         {timeStart: 48.1, timeEnd: 57.8, element: "#line7"},
-
-        // …etc. make sure these numbers are in *media* seconds
+        {timeStart: 58, timeEnd: 62.1, element: "#line8"},
+        {timeStart: 62.2, timeEnd: 67.7, element: "#line9"},
+        {timeStart: 67.9, timeEnd: 69, element: "#line10"},
+        {timeStart: 69.1, timeEnd: 91.8, element: "#line11"},
+        {timeStart: 91.9, timeEnd: 93, element: "#line12"},
+        {timeStart: 93.1, timeEnd: 105, element: "#line13"},
+        {timeStart: 105, timeEnd: 107.1, element: "#line14"},
+        {timeStart: 107.2, timeEnd: 114.2, element: "#line15"},
+        {timeStart: 114.4, timeEnd: 116, element: "#line16"},
+        {timeStart: 116.1, timeEnd: 137, element: "#line17"},
+        {timeStart: 137.1, timeEnd: 139.6, element: "#line18"},
+        {timeStart: 139.8, timeEnd: 151.1, element: "#line19"},
+        {timeStart: 151.3, timeEnd: 153.5, element: "#line20"},
+        {timeStart: 153.7, timeEnd: 176.8, element: "#line21"},
+        {timeStart: 177, timeEnd: 180.8, element: "#line22"},
+        {timeStart: 180.9, timeEnd: 203.5, element: "#line23"},
+        {timeStart: 203.6, timeEnd: 205.5, element: "#line24"},
       ];
 
       const audio = document.getElementById("narration");
+      const wrapper = document.getElementById("audioWrapper");
+      const autoScroll = document.getElementById("auto_scroll_checkbox");
+
+      audio.addEventListener("play", () => {
+        wrapper.classList.add("audio-sticky-active");
+      });
+
       audio.addEventListener("timeupdate", () => {
         const t = audio.currentTime;
         timestamps.forEach(({timeStart, timeEnd, element}) => {
           const el = document.querySelector(element);
-          if (!el) return;
-          el.classList.toggle("highlight", t >= timeStart && t < timeEnd);
+          const isActive = el && t >= timeStart && t < timeEnd;
+          el && el.classList.toggle("highlight", isActive);
+          if (isActive && autoScroll.checked) {
+            el.scrollIntoView({behavior: "smooth", block: "center"});
+          }
         });
       });
 
@@ -202,26 +435,43 @@
         const summary = document.querySelector(element);
         if (!summary) return;
         const details = summary.closest("details");
-        if (!details) return;
-
         const btn = document.createElement("button");
         btn.textContent = "▶ Go to line";
         btn.className = "goto";
-        btn.style.marginTop = "0.5rem";
         btn.addEventListener("click", () => {
           audio.currentTime = timeStart;
           audio.play();
           details.open = true;
+          if (autoScroll.checked) {
+            summary.scrollIntoView({behavior: "smooth", block: "center"});
+          }
         });
-
-        // find the commentary block, if any
         const commentary = details.querySelector(".commentary");
-        if (commentary) {
-          details.insertBefore(btn, commentary);
-        } else {
-          details.appendChild(btn);
+        commentary ? details.insertBefore(btn, commentary) : details.appendChild(btn);
+      });
+
+      window.addEventListener("scroll", () => {
+        if (!autoScroll.checked) return;
+        const active = document.querySelector(".highlight");
+        if (!active) return;
+        const rect = active.getBoundingClientRect();
+        // when the element is entirely above or below the viewport
+        if (rect.bottom < 0 || rect.top > window.innerHeight) {
+          autoScroll.checked = false;
         }
       });
+
+      // in your existing <script> after you set up the audio & autoScroll...
+      document.getElementById("rewind10").addEventListener("click", () => {
+        audio.currentTime = Math.max(0, audio.currentTime - 10);
+        if (audio.paused) audio.play();
+      });
+      document.getElementById("forward10").addEventListener("click", () => {
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+        if (audio.paused) audio.play();
+      });
+
+      // keep the rest of your play‐to‐activate‐sticky and auto‐scroll logic unchanged
     </script>
 
     <footer>&copy; 2025 Scriptum Mundi — Translation curated with reverence</footer>
